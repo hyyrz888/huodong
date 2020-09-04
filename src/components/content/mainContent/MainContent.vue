@@ -1,19 +1,19 @@
 <template>
   <div class="market-wrap layout-content">
 
-<!-- 左侧菜单-->
+    <!-- 左侧菜单-->
     <div class="market-sidebar">
       <div class="market-sidebar-header">
         <el-input
-            placeholder="输入搜索内容"
-            suffix-icon="el-icon-search"
-             class="search">
+          placeholder="输入搜索内容"
+          suffix-icon="el-icon-search"
+          class="search">
         </el-input>
       </div>
       <!--遮罩眼阴影-->
       <div class="market-sidebar-mask" :show="isShow"></div>
 
-      <div class="market-sidebar-content">
+      <div class="market-sidebar-content" ref="slideBarRef" @scroll="handleScroll">
 
         <!--行业活动推荐-->
         <div class="list flex">
@@ -33,7 +33,7 @@
 
         <div class="list flex pointer">
           <div class="title align-center bold"><i class="el-icon-set-up"></i> 活动分类</div>
-          <div class="item align-center poa">
+          <div class="item align-center poa" @mouseenter="handleMouseOver" @mouseleave="handleMouseMove">
             <div class="item-icon">
               <i class="el-icon-s-tools"></i>
             </div>
@@ -43,27 +43,38 @@
             </div>
             <i class="el-icon-arrow-right"></i>
             <!--market-slider-popup-->
-            <div class="market-slider-popup" style="position: absolute;left:340px;top: 0">
-              <div class="popup-title">
-                <span>游戏抽奖</span>
-                <span>查看更多>></span>
-              </div>
-              <!--中间部分-->
-              <div class="popup content">
-                <div class="popup-active">
-                  <div class="popup-active-cover"></div>
-                  <div class="popup-active-info">
-                    <div class="popup-active-name">幸运大转盘</div>
-                    <div class="popup-active-explain">常规的大转盘抽奖</div>
+            <div class="md-pop-content" style="position: absolute;left:336px;" ref="popContent" v-show="popShow">
+
+              <div class="market-slider-popup flex align-center flex-column">
+                <div class="popup-mask"></div>
+                <div class="popup-title flex justify-between align-center">
+                  <span class="bold">游戏抽奖1</span>
+                  <span class="more">查看更多>></span>
+                </div>
+                <!--中间部分-->
+                <div class="popup-content flex justify-between">
+                  <div class="popup-active flex align-center">
+                    <div class="popup-active-cover"></div>
+                    <div class="popup-active-info flex justify-between flex-column">
+                      <div class="popup-active-name text-ellipsis">幸运大转盘</div>
+                      <div class="popup-active-explain text-ellipsis">常规的大转盘抽奖</div>
+                    </div>
+                  </div>
+                  <div class="popup-active flex align-center">
+                    <div class="popup-active-cover"></div>
+                    <div class="popup-active-info flex justify-between flex-column">
+                      <div class="popup-active-name text-ellipsis">幸运大转盘</div>
+                      <div class="popup-active-explain text-ellipsis">常规的大转盘抽奖</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!--文字列表-->
-              <div class="popup-list">
-                <div class="popup-list-item">疯狂抢红包</div>
-                <div class="popup-list-item">疯狂抢红包</div>
-                <div class="popup-list-item">疯狂抢红包</div>
-                <div class="popup-list-item">疯狂抢红包</div>
+                <!--文字列表-->
+                <div class="popup-list flex flex-wrap">
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                </div>
               </div>
             </div>
           </div>
@@ -155,18 +166,35 @@
       </div>
     </div>
 
-
-<!--    <el-main>Main</el-main>-->
+    <!--右侧广告区域-->
+    <adv-content></adv-content>
 
   </div>
 </template>
 
 <script>
+import AdvContent from "@/components/content/mainContent/AdvContent";
 export default {
   name: "MainAside",
-  data(){
-    return{
-      isShow: true
+  components: {AdvContent},
+  data() {
+    return {
+      isShow: true,
+      popShow:false
+    }
+  },
+  methods:{
+    handleScroll(){
+      console.log(this.$refs.slideBarRef.scrollTop)
+    },
+    handleMouseOver(e){
+      //获取market-sidebar-content的scrollTop
+      let pt = e.currentTarget.offsetTop - this.$refs.slideBarRef.scrollTop
+      this.$refs.popContent.style.top = pt +'px'
+      this.popShow = true
+    },
+    handleMouseMove(){
+      this.popShow = false
     }
   }
 }
@@ -228,7 +256,7 @@ export default {
 .market-sidebar-content {
   width: 336px;
   overflow-y: auto;
-  height:calc(100% - 78px);
+  height: calc(100% - 78px);
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -237,9 +265,11 @@ export default {
   flex-direction: column;
   margin-bottom: 40px;
 }
-.list .item:hover{
+
+.list .item:hover {
   background: #f7fff4;
 }
+
 .list .item-icon i {
   font-size: 24px;
   margin-right: 3px;
@@ -253,11 +283,13 @@ export default {
   border-bottom: 1px solid #eee;
   color: #999;
 }
-.list .title i{
+
+.list .title i {
   font-size: 22px;
   line-height: 50px;
   margin-right: 3px;
 }
+
 .list .item-icon {
   width: 36px;
   height: 40px;
@@ -303,6 +335,9 @@ export default {
 }
 
 /*popup*/
+.md-pop-content{
+  /*display: none;*/
+}
 .market-slider-popup {
   width: 720px;
   padding: 24px 0
@@ -319,24 +354,106 @@ export default {
   width: 36px;
   height: 36px;
 }
-.list .left-side .icon{
+
+.list .left-side .icon {
   width: 100%;
-  height:100%;
+  height: 100%;
   border-radius: 50%;
-  background:linear-gradient(-35deg, rgb(57, 215, 255), rgb(67, 129, 253));
+  background: linear-gradient(-35deg, rgb(57, 215, 255), rgb(67, 129, 253));
 }
-.list .left-side .icon i{
+
+.list .left-side .icon i {
   font-size: 28px;
-  color:#fff
+  color: #fff
 }
-.serial-num{
+
+.serial-num {
   font-size: 16px;
-  color:#535353
+  color: #535353
 }
+
 .market-sidebar .market-sidebar-content::-webkit-scrollbar {
   display: none;
 }
-.el-input.is-active .el-input__inner, .el-input__inner:focus{
-  border:1px solid #4ec227
+
+.el-input.is-active .el-input__inner, .el-input__inner:focus {
+  border: 1px solid #4ec227
+}
+
+/*弹出层*/
+.md-pop-content{
+  width: 720px;
+  border-radius: 0 6px 6px 0;
+  -webkit-box-shadow: 0 1px 8px 0 rgba(0,0,0,.18);
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,.18);
+}
+.md-pop-content .market-slider-popup{
+  padding: 24px 0;
+  background: #fff;
+}
+/*用来和左侧的列表框衔接*/
+.popup-mask{
+  width:6px;
+  height:69px;
+  background: #fff;
+  position: absolute;
+  left:-6px;
+  top:0
+}
+.popup-title,.popup-content,.popup-list{
+  width:660px
+}
+.popup-title{
+  font-size: 16px;
+  height: 26px;
+  color:#000
+}
+.popup-title .more{
+  font-size:12px;
+  color:#b2b2b2
+}
+.popup-title .more:hover{
+  color:#898989
+}
+.popup-content{
+  margin:16px 0
+}
+.popup-content .popup-active{
+  width:322px;
+  height: 70px;
+  background-color: #f4f7f9;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.popup-content .popup-active:hover {
+  background:#edf2f5
+}
+.popup-content .popup-active .popup-active-cover{
+  width: 90px;
+  height:50px;
+  margin:0 10px;
+  position: relative;
+}
+.popup-active-name{
+  max-width: 202px;
+}
+.popup-active-explain{
+  max-width: 190px;
+  font-size: 12px;
+  color:#898989
+ }
+.popup-list .popup-list-item{
+  width:153px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 16px;
+  text-align: center;
+  color: #535353;
+}
+.popup-list .popup-list-item:hover{
+  color:#4ac227
+}
+.popup-list .popup-list-item:nth-child(4n){
+  margin-right: 0;
 }
 </style>

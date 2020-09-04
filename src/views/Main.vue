@@ -6,7 +6,7 @@
       <div class="el-scrollbar__view">
 
         <!--头部-->
-        <MdHeader />
+        <md-header />
 
       <router-view/>
 
