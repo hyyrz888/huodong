@@ -33,7 +33,7 @@
 
         <div class="list flex pointer">
           <div class="title align-center bold"><i class="el-icon-set-up"></i> 活动分类</div>
-          <div class="item align-center poa" @mouseenter="handleMouseOver" @mouseleave="handleMouseMove">
+          <div class="item align-center poa" @mouseenter="handleMouseOver($event,'0')" @mouseleave="handleMouseMove">
             <div class="item-icon">
               <i class="el-icon-s-tools"></i>
             </div>
@@ -43,7 +43,7 @@
             </div>
             <i class="el-icon-arrow-right"></i>
             <!--market-slider-popup-->
-            <div class="md-pop-content" style="position: absolute;left:336px;" ref="popContent" v-show="popShow">
+            <div class="md-pop-content" style="position: absolute;left:336px;" v-show="type==='0'">
 
               <div class="market-slider-popup flex align-center flex-column">
                 <div class="popup-mask"></div>
@@ -77,8 +77,105 @@
                 </div>
               </div>
             </div>
+
           </div>
+          <div class="item align-center poa" @mouseenter="handleMouseOver($event,'1')" @mouseleave="handleMouseMove">
+            <div class="item-icon">
+              <i class="el-icon-s-tools"></i>
+            </div>
+            <div class="info">
+              <div class="first-line"><span class="blod">游戏抽奖</span></div>
+              <div class="second-line"><span class="text">幸运大转盘 天降红包雨 疯狂抢红包</span></div>
+            </div>
+            <i class="el-icon-arrow-right"></i>
+            <!--market-slider-popup-->
+            <div class="md-pop-content" style="position: absolute;left:336px;" v-show="type==='1'">
+
+              <div class="market-slider-popup flex align-center flex-column">
+                <div class="popup-mask"></div>
+                <div class="popup-title flex justify-between align-center">
+                  <span class="bold">游戏抽奖1</span>
+                  <span class="more">查看更多>></span>
+                </div>
+                <!--中间部分-->
+                <div class="popup-content flex justify-between">
+                  <div class="popup-active flex align-center">
+                    <div class="popup-active-cover"></div>
+                    <div class="popup-active-info flex justify-between flex-column">
+                      <div class="popup-active-name text-ellipsis">幸运大转盘</div>
+                      <div class="popup-active-explain text-ellipsis">常规的大转盘抽奖</div>
+                    </div>
+                  </div>
+                  <div class="popup-active flex align-center">
+                    <div class="popup-active-cover"></div>
+                    <div class="popup-active-info flex justify-between flex-column">
+                      <div class="popup-active-name text-ellipsis">幸运大转盘</div>
+                      <div class="popup-active-explain text-ellipsis">常规的大转盘抽奖</div>
+                    </div>
+                  </div>
+                </div>
+                <!--文字列表-->
+                <div class="popup-list flex flex-wrap">
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="item align-center poa" @mouseenter="handleMouseOver($event,'2')" @mouseleave="handleMouseMove">
+            <div class="item-icon">
+              <i class="el-icon-s-tools"></i>
+            </div>
+            <div class="info">
+              <div class="first-line"><span class="blod">游戏抽奖</span></div>
+              <div class="second-line"><span class="text">幸运大转盘 天降红包雨 疯狂抢红包</span></div>
+            </div>
+            <i class="el-icon-arrow-right"></i>
+            <!--market-slider-popup-->
+            <div class="md-pop-content" style="position: absolute;left:336px;"  v-show="type==='2'">
+
+              <div class="market-slider-popup flex align-center flex-column">
+                <div class="popup-mask"></div>
+                <div class="popup-title flex justify-between align-center">
+                  <span class="bold">游戏抽奖1</span>
+                  <span class="more">查看更多>></span>
+                </div>
+                <!--中间部分-->
+                <div class="popup-content flex justify-between">
+                  <div class="popup-active flex align-center">
+                    <div class="popup-active-cover"></div>
+                    <div class="popup-active-info flex justify-between flex-column">
+                      <div class="popup-active-name text-ellipsis">幸运大转盘</div>
+                      <div class="popup-active-explain text-ellipsis">常规的大转盘抽奖</div>
+                    </div>
+                  </div>
+                  <div class="popup-active flex align-center">
+                    <div class="popup-active-cover"></div>
+                    <div class="popup-active-info flex justify-between flex-column">
+                      <div class="popup-active-name text-ellipsis">幸运大转盘</div>
+                      <div class="popup-active-explain text-ellipsis">常规的大转盘抽奖</div>
+                    </div>
+                  </div>
+                </div>
+                <!--文字列表-->
+                <div class="popup-list flex flex-wrap">
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                  <div class="popup-list-item text-ellipsis">疯狂抢红包</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
         </div>
+
 
         <!--热度排行-->
         <div class="list flex pointer">
@@ -180,21 +277,22 @@ export default {
   data() {
     return {
       isShow: true,
-      popShow:false
+      type:''
     }
   },
   methods:{
     handleScroll(){
       console.log(this.$refs.slideBarRef.scrollTop)
     },
-    handleMouseOver(e){
+    handleMouseOver(e,type){
+      console.log(e.currentTarget.offsetTop,this.$refs.slideBarRef.scrollTop)
+      this.type = type
       //获取market-sidebar-content的scrollTop
       let pt = e.currentTarget.offsetTop - this.$refs.slideBarRef.scrollTop
-      this.$refs.popContent.style.top = pt +'px'
-      this.popShow = true
+      e.currentTarget.children[e.currentTarget.children.length-1].style.top = pt +'px'
     },
     handleMouseMove(){
-      this.popShow = false
+      this.type=''
     }
   }
 }

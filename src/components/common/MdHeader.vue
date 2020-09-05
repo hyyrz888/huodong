@@ -4,15 +4,10 @@
       <a :href="logoUrl" class="mdlogo"><img src="@/assets/logo.png" alt=""></a>
     </div>
     <div class="header-menu flex flex-item align-center">
-      <div class="item first-item pointer active">
-        活动市场
+      <div class="item first-item pointer" v-for="(item,index) in navList" :key="index">
+        <router-link tag='div' router-link-active :to="item.toPath">{{item.title}}</router-link>
       </div>
-      <div class="item manage-center pointer">
-        管理中心
-      </div>
-      <div class="item feature-cate pointer">
-        功能目录
-      </div>
+
     </div>
     <!--图标菜单-->
     <div class="hd-menu flex align-center justify-between">
@@ -74,9 +69,24 @@ export default {
   name: "MdHeader",
   data() {
     return {
+      isNow:0,
       type: '',
       popIsShow: false,
       logoUrl: 'http://www.dq800.com',
+      navList:[
+        {
+          toPath:'/main',
+          title:'活动市场'
+        },
+        {
+          toPath:'/manage',
+          title:'管理中心'
+        },
+        {
+          toPath:'/feature',
+          title:'功能目录'
+        }
+      ],
       packageList: [
         {
           toLink: 'http://www.dq800.com',
@@ -149,6 +159,14 @@ export default {
       ]
     }
   },
+  mounted() {
+    // console.log(this.$route.path ,this.route)
+  },
+  computed:{
+    // isActive(){
+    //
+    // }
+  },
   methods: {
     handleShowPop(type) {
       this.type = type
@@ -186,12 +204,11 @@ export default {
   color: #4ec227
 }
 
-.header-menu .item.active {
+.header-menu .item .router-link-active  {
   font-weight: 700;
   color: #4ec227
 }
-
-.header-menu .item.active:after {
+.header-menu .item .router-link-active:after {
   position: absolute;
   width: 40px;
   height: 4px;
@@ -318,9 +335,5 @@ export default {
   position: absolute;
   right: 16px;
   top: 10px;
-}
-
-.account .badge {
-
 }
 </style>

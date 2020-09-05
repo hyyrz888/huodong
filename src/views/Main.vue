@@ -8,7 +8,8 @@
         <!--头部-->
         <md-header />
 
-      <router-view/>
+        <!--内容-->
+        <MainContent />
 
       </div>
     </div>
@@ -18,11 +19,13 @@
 <script>
 
 import MdHeader from "@/components/common/MdHeader";
+import MainContent from "@/components/content/mainContent/MainContent";
 
 export default {
   name: "Main",
   components: {
-    MdHeader
+    MdHeader,
+    MainContent
   },
   data() {
     return {
