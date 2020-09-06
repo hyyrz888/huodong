@@ -47,7 +47,7 @@
             </el-menu-item>
             <el-menu-item index="/manage/hdManageToolKit">
               <i class="el-icon-setting"></i>
-              <span slot="title">特营销工具</span>
+              <span slot="title">营销工具</span>
             </el-menu-item>
             <el-menu-item index="/manage/businessAstTab">
               <i class="el-icon-setting"></i>

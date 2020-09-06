@@ -19,6 +19,7 @@ name: "ManageRight"
   bottom: 0;
   right: 0;
   top: 70px;
+  overflow-y:auto;
 }
 .right-content{
   width: 100%;
