@@ -72,7 +72,14 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  'router-link-active': 'active'
+  'router-link-active': 'active',
+  scrollBehavior (to) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    }
+  }
 })
 
 export default router

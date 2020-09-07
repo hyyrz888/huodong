@@ -18,7 +18,13 @@
 
 <script>
 export default {
-name: "FeatureIndex"
+name: "FeatureIndex",
+  mounted() {
+  this.$nextTick(()=>{
+    window.addEventListener('scroll',this.handleScroll,true)
+  })
+
+  }
 }
 </script>
 

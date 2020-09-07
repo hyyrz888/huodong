@@ -1,195 +1,342 @@
 <template>
 
-  <el-table class="allService" :span-method="objectSpanMethod" :data="yxServiceList" :header-row-style="headerStyle">
+  <div id="allService">
 
-    <el-table-column label="服务列表">
+    <el-table class="allService">
+      <template slot="empty">
 
-      <el-table-column label="服务类型" prop="serviceType">
-
+      </template>
+      <el-table-column label="服务列表">
+        <el-table-column label="服务类型" prop="serviceType">
+        </el-table-column>
+        <el-table-column label="服务内容" prop="serviceContent" width="230">
+        </el-table-column>
       </el-table-column>
-
-      <el-table-column label="服务内容" prop="serviceContent" width="230">
-
+      <el-table-column label="互动免费版" prop="freeIcon" :render-header="renderFree">
       </el-table-column>
+      <el-table-column label="互动白银版" prop="silverIcon" :render-header="rendersilver">
+      </el-table-column>
+      <el-table-column label="互动铂金版" prop="platinaIcon" :render-header="renderplatina">
+      </el-table-column>
+      <el-table-column label="互动钻石版" prop="masonryIcon" :render-header="rendermasonry">
+      </el-table-column>
+      <el-table-column label="H5互动联合版" prop="interactiveIcon" :render-header="renderinteractive">
+      </el-table-column>
+      <el-table-column label="互动门店版" prop="shopIcon" :render-header="rendershop">
+      </el-table-column>
+    </el-table>
 
-    </el-table-column>
+     <!--H5-->
+    <H5Table />
 
-    <el-table-column label="互动免费版" prop="freeIcon">
-      <template slot-scope="scope">
-        <i :class="scope.row.freeIcon"></i>
-      </template>
-    </el-table-column>
+    <!--活动营销-->
+    <HdyxTable/>
 
-    <el-table-column label="互动白银版" prop="silverIcon">
-      <template slot-scope="scope">
-        <i :class="scope.row.silverIcon"></i>
-      </template>
-    </el-table-column>
+    <!--活动传播-->
+    <HdcbTable/>
+    <!--账号设置-->
 
-    <el-table-column label="互动铂金版" prop="platinaIcon">
-      <template slot-scope="scope">
-        <i :class="scope.row.platinaIcon"></i>
-      </template>
-    </el-table-column>
+    <!--品牌标识-->
 
-    <el-table-column label="互动钻石版" prop="masonryIcon">
-      <template slot-scope="scope">
-        <i :class="scope.row.masonryIcon"></i>
-      </template>
-    </el-table-column>
+    <!--微信红包-->
 
-    <el-table-column label="H5互动联合版" prop="interactiveIcon">
-      <template slot-scope="scope">
-        <i :class="scope.row.interactiveIcon"></i>
-      </template>
-    </el-table-column>
+    <!--活动功能-->
 
-    <el-table-column label="互动门店版" prop="shopIcon">
-      <template slot-scope="scope">
-        <i :class="scope.row.shopIcon"></i>
-      </template>
-      <div>
-        啊发发
-      </div>
-    </el-table-column>
+    <!--活动奖品-->
 
-  </el-table>
+    <!--核销奖品-->
+
+    <!--高级服务-->
+
+    <!--活动数据-->
+
+  </div>
 </template>
 
 <script>
+import H5Table from "@/components/content/featureContent/childComps/H5Table";
+import HdyxTable from "@/components/content/featureContent/childComps/HdyxTable";
+import HdcbTable from "@/components/content/featureContent/childComps/HdcbTable";
+
 export default {
-name: "AllService",
-  data(){
-  return{
-    yxServiceList:[
-      {
-        serviceType:'H5功能',
-        serviceContent:"微传单尊享版功能（H5、表单）",
-        freeIcon:"el-icon-circle-close",
-        silverIcon:"el-icon-circle-close",
-        platinaIcon:"el-icon-circle-close",
-        masonryIcon:"el-icon-circle-close",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-close"
-      },
-      {
-        serviceType:'活动营销',
-        serviceContent:"抽奖（大转盘、摇一摇等）",
-        freeIcon:"el-icon-circle-check",
-        silverIcon:"el-icon-circle-check",
-        platinaIcon:"el-icon-circle-check",
-        masonryIcon:"el-icon-circle-check",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-check"
-      },
-      {
-        serviceContent:"游戏营销",
-        freeIcon:"el-icon-circle-check",
-        silverIcon:"el-icon-circle-check",
-        platinaIcon:"el-icon-circle-check",
-        masonryIcon:"el-icon-circle-check",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-check"
-      },
-      {
-        serviceContent:"涨粉/推广活动",
-        freeIcon:"el-icon-circle-close",
-        silverIcon:"el-icon-circle-close",
-        platinaIcon:"el-icon-circle-check",
-        masonryIcon:"el-icon-circle-check",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-check"
-      },
-      {
-        serviceContent:"促销活动（拼团、秒杀等）",
-        freeIcon:"el-icon-circle-close",
-        silverIcon:"el-icon-circle-close",
-        platinaIcon:"el-icon-circle-close",
-        masonryIcon:"el-icon-circle-check",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-check"
-      },
-      {
-        serviceContent:"留存活动（种树等）",
-        freeIcon:"el-icon-circle-close",
-        silverIcon:"el-icon-circle-close",
-        platinaIcon:"el-icon-circle-close",
-        masonryIcon:"el-icon-circle-check",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-check"
-      },
-      {
-        serviceContent:"投票活动",
-        freeIcon:"el-icon-circle-check",
-        silverIcon:"el-icon-circle-check",
-        platinaIcon:"el-icon-circle-check",
-        masonryIcon:"el-icon-circle-check",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-check"
-      },
-      {
-        serviceContent:"答题活动",
-        freeIcon:"el-icon-circle-check",
-        silverIcon:"el-icon-circle-check",
-        platinaIcon:"el-icon-circle-check",
-        masonryIcon:"el-icon-circle-check",
-        interactiveIcon:"el-icon-circle-check",
-        shopIcon:"el-icon-circle-check"
-      }
-    ]
-  }
+  name: "AllService",
+  components: {
+    H5Table,
+    HdcbTable,
+    HdyxTable
   },
   methods:{
-    headerStyle({row, rowIndex}){
-     if(rowIndex ===1){
-       return {
-         marginBottom:'10px'
-       }
-     }
+    renderFree(h,{column}){
+      console.log(h)
+      return h(
+        'div',
+        [
+          h('span',{
+            class:'info'
+          }, column.label),
+          h('b',{
+            style:'color:#ff4d4d;display:block;margin:10px 0;'
+          },'免费'),
+          h('small',{
+            class:'small'
+          },'当前版本')
+        ],
+      );
     },
-    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-
-
-      if(columnIndex === 0){
-        //console.log(rowIndex)
-        if(rowIndex === 0){
-          return {
-              rowspan:1,
-              colspan:1
-          }
-        }
-        if(rowIndex === 1){
-          return {
-            rowspan:7,
-            colspan:1
-          }
-        }else{
-          return {
-            rowspan:0,
-            colspan:0
-          }
-        }
-      }
-
+    rendersilver(h,{column}){
+      console.log(h)
+      return h(
+        'div',
+        [
+          h('span',{
+            class:'info'
+          }, column.label),
+          h('b',{
+            style:'color:#ff4d4d;display:block;margin:10px 0;font-size:16px'
+          },'998元/年'),
+          h("el-button",{
+            props:{
+              round:'',
+              size:'medium'
+            },
+            class:'button is-warning',
+            style:'color:#fff'
+          },'立即购买'),
+          h('small',{
+            class:'small'
+          },'限时买二送二')
+        ],
+      );
+    },
+    renderplatina(h,{column}){
+      console.log(h)
+      return h(
+        'div',
+        [
+          h('span',{
+            class:'info'
+          }, column.label),
+          h('b',{
+            style:'color:#ff4d4d;display:block;margin:10px 0;font-size:16px'
+          },'1498元/年'),
+          h("el-button",{
+            props:{
+              round:'',
+              size:'medium'
+            },
+            class:'button is-danger',
+            style:'color:#fff'
+          },'立即购买'),
+          h('small',{
+            class:'small'
+          },'当前版本')
+        ],
+      );
+    },
+    rendermasonry(h,{column}){
+      return h(
+        'div',
+        [
+          h('span',{
+            class:'info'
+          }, column.label),
+          h('b',{
+            style:'color:#ff4d4d;display:block;margin:10px 0;font-size:16px'
+          },'1998元/年'),
+          h("el-button",{
+            props:{
+              round:'',
+              size:'medium'
+            },
+            class:'button is-primary',
+            style:'color:#fff'
+          },'立即购买'),
+          h('small',{
+            class:'small'
+          },'当前版本')
+        ],
+      );
+    },
+    renderinteractive(h,{column}){
+      console.log(h)
+      return h(
+        'div',
+        [
+          h('span',{
+            class:'info'
+          }, column.label),
+          h('b',{
+            style:'color:#ff4d4d;display:block;margin:10px 0;font-size:16px'
+          },'2798元/年'),
+          h("el-button",{
+            props:{
+              round:'',
+              size:'medium'
+            },
+            class:'button is-blueCyan',
+            style:'color:#fff'
+          },'立即购买'),
+          h('small',{
+            class:'small'
+          },'当前版本')
+        ],
+      );
+    },
+    rendershop(h,{column}){
+      console.log(h)
+      return h(
+        'div',
+        [
+          h('span',{
+            class:'info'
+          }, column.label),
+          h('b',{
+            style:'color:#ff4d4d;display:block;margin:10px 0;font-size:16px'
+          },'2798元/年'),
+          h("el-button",{
+            props:{
+              round:'',
+              size:'medium'
+            },
+            class:'button is-purple',
+            style:'color:#fff'
+          },'立即购买'),
+          h('small',{
+            class:'small'
+          },'当前版本')
+        ],
+      );
     }
   }
 }
 </script>
 
-<style>
-.allService .cell{
-  text-align: center;
+<style scoped>
+#allService{
+  padding-bottom:50px
 }
-.allService  i{
-  font-size: 24px;
-}
-.el-icon-circle-close{
-  color:#ff4d4d
-}
-.el-icon-circle-check{
-  color:#4ac227;
+.allService{
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.1);
 }
 </style>
 <style>
+.el-table thead.is-group tr:first-child th:first-child{
+  border-top:6px solid #dcdcdc;
+}
+.el-table thead.is-group tr:first-child th:nth-child(2){
+  border-top:6px solid #99ebbe;
+}
+.el-table thead.is-group tr:first-child th:nth-child(3){
+  border-top:6px solid #fed696;
+}
+.el-table thead.is-group tr:first-child th:nth-child(4){
+  border-top:6px solid #fcb6b4;
+}
+.el-table thead.is-group tr:first-child th:nth-child(5){
+  border-top:6px solid #a1c8fe;
+}
+.el-table thead.is-group tr:first-child th:nth-child(6){
+  border-top:6px solid #0cc5c3;
+}
+.el-table thead.is-group tr:first-child th:nth-child(7){
+  border-top:6px solid #824af3;
+}
+.button{
+  border:0 !important
+}
+.button.is-warning{
+  background: -webkit-gradient(linear,left top,right top,from(#ffaa30),to(#ffcd47));
+  background: linear-gradient(90deg,#ffaa30,#ffcd47);
+  -webkit-box-shadow: 0 3px 8px 0 rgba(255,175,51,.3);
+  box-shadow: 0 3px 8px 0 rgba(255,175,51,.3);
+}
+.button.is-warning:hover {
+  background: -webkit-gradient(linear,left top,right top,from(#f79f20),to(#f8be23));
+  background: linear-gradient(90deg,#f79f20,#f8be23);
+}
+.button.is-danger{
+  background: -webkit-gradient(linear,left top,right top,from(#ff4d4d),to(#ff793e));
+  background: linear-gradient(90deg,#ff4d4d,#ff793e);
+  -webkit-box-shadow: 0 3px 8px 0 rgba(255,84,76,.3);
+  box-shadow: 0 3px 8px 0 rgba(255,84,76,.3);
+}
+.button.is-danger:hover {
+  background: -webkit-gradient(linear,left top,right top,from(#f84141),to(#f8692a));
+  background: linear-gradient(90deg,#f84141,#f8692a);
+}
+.button.is-primary {
+  background: -webkit-gradient(linear,left top,right top,from(#4381fd),to(#44b6ff));
+  background: linear-gradient(90deg,#4381fd,#44b6ff);
+  -webkit-box-shadow: 0 3px 8px 0 rgba(67,137,253,.3);
+  box-shadow: 0 3px 8px 0 rgba(67,137,253,.3);
+}
+.button.is-primary:hover {
+  background: -webkit-gradient(linear,left top,right top,from(#2d70f6),to(#29a8f9));
+  background: linear-gradient(90deg,#2d70f6,#29a8f9);
+}
+.button.is-blueCyan{
+  background: -webkit-gradient(linear,left top,right top,from(#00cbd2),to(#40e4b8));
+  background: linear-gradient(90deg,#00cbd2,#40e4b8);
+  -webkit-box-shadow: 0 3px 8px 0 rgba(5,205,209,.3);
+  box-shadow: 0 3px 8px 0 rgba(5,205,209,.3);
+}
+.button.is-blueCyan:hover {
+  background: -webkit-gradient(linear,left top,right top,from(#00c4cb),to(#2ae0af));
+  background: linear-gradient(90deg,#00c4cb,#2ae0af);
+}
+.button.is-purple{
+  background: -webkit-gradient(linear,left top,right top,from(#8169ff),to(#a37aff));
+  background: linear-gradient(90deg,#8169ff,#a37aff);
+  -webkit-box-shadow: 0 3px 8px 0 rgba(133,107,255,.3);
+  box-shadow: 0 3px 8px 0 rgba(133,107,255,.3);
+}
+.button.is-purple:hover {
+  background: -webkit-gradient(linear,left top,right top,from(#745bf9),to(#9164f9));
+  background: linear-gradient(90deg,#745bf9,#9164f9);
+}
+th .info{
+  position: relative;
+  line-height: 1;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+th .small{
+  height: 12px;
+  line-height: 12px;
+  margin-bottom: 0;
+  color: #b2b2b2;
+  display: block;
+  margin-top: 20px;
+}
+.el-table th{
+  padding: 50px 0 !important;
+}
+.el-table thead.is-group th{
+  background-color: #fff !important;
+}
+.allService th .cell{
+  font-size: 16px;
+  font-weight: normal;
+}
+.el-table__empty-block{
+  display: none !important;
+}
+.allService .cell {
+  text-align: center;
+}
 
+.el-icon-circle-close {
+  color: #ff4d4d
+}
+
+.el-icon-circle-check {
+  color: #4ac227;
+}
+</style>
+<style>
+.allService i {
+  font-size: 24px;
+}
 </style>
