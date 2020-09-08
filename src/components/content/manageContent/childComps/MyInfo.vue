@@ -53,7 +53,7 @@ export default {
 }
 </style>
 <style>
-.el-card{
+#myinfo .el-card{
   margin-bottom: 24px;
 }
 #myinfo .el-card{

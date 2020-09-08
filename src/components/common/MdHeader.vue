@@ -20,9 +20,44 @@
           </a>
         </div>
       </div>
+
+      <!--通知消息-->
       <div class="menu-item flex justify-center align-center pointer">
         <i class="el-icon-bell"/>
+
+        <div class="header-popup bell pointer">
+
+          <div class="bell-content">
+
+            <div class="bellTitle flex">
+              <span class="">我的消息</span>
+              <span>功能更新</span>
+            </div>
+
+            <div class="bellDetail">
+
+              <div class="detail-item">
+                <a href=""><img src="@/assets/images/mymsg.png" alt=""></a>
+              </div>
+              <div class="detail-item">
+                <ul>
+                  <li class="text-ellipsis"><a href="">8月26号更新：H5活动支持跳转小程序</a></li>
+                  <li class="text-ellipsis"><a href="">8月26号更新：H5活动支持跳转小程序</a></li>
+                  <li class="text-ellipsis"><a href="">8月26号更新：H5活动支持跳转小程序</a></li>
+                  <li class="text-ellipsis"><a href="">8月26号更新：H5活动支持跳转小程序</a></li>
+                  <li class="text-ellipsis"><a href="">8月26号更新：H5活动支持跳转小程序</a></li>
+                  <li class="text-ellipsis"><a href="">8月26号更新：H5活动支持跳转小程序</a></li>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
       </div>
+
       <div class="menu-item flex justify-center align-center pointer" @mouseenter="handleShowPop('services')"
            @mouseleave="handleClosePop">
         <i class="el-icon-service flex justify-center align-center"/>
@@ -161,11 +196,22 @@ export default {
   },
   mounted() {
     // console.log(this.$route.path ,this.route)
-  },
-  computed:{
-    // isActive(){
-    //
-    // }
+    let bellTitle = document.querySelector(".bellTitle")
+    let bellDetail = document.querySelector(".bellDetail")
+    let titItem = bellTitle.children
+    let detailItem = bellDetail.children
+
+    for(let i =0;i<titItem.length;i++){
+
+      (function(index){
+        titItem[i].onmouseover=function(){
+
+          titItem[index].classList.add('active')
+          detailItem[index].classList.add('active')
+        }
+      })(i)
+
+    }
   },
   methods: {
     handleShowPop(type) {
@@ -175,11 +221,12 @@ export default {
     handleClosePop() {
       this.type = ''
     }
+
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .md-header {
   position: fixed;
   top: 0;
@@ -251,7 +298,6 @@ export default {
   top: 55px;
   left: 50%;
   box-shadow: 0 2px 20px rgba(0, 0, 0, .12);
-  padding: 10px 0;
   border-radius: 6px;
   transform: translateX(-50%);
   background: #fff;
@@ -262,14 +308,17 @@ export default {
 }
 
 .header-popup.consult-box {
+  padding: 10px 0;
   width: 122px;
 }
 
 .header-popup.message {
+  padding: 10px 0;
   width: 320px;
 }
 
 .header-popup.account {
+  padding: 10px 0;
   width: 180px;
 }
 
@@ -335,5 +384,73 @@ export default {
   position: absolute;
   right: 16px;
   top: 10px;
+}
+.bell{
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  top: 55px;
+  width:320px;
+  .bell-content{
+    box-shadow: 0 2px 20px 0 rgba(0,0,0,.12);
+    border-radius: 6px;
+    .bellTitle{
+      height:40px;
+      line-height: 40px;
+      text-align: center;
+      background-color: #fff;
+      span{
+        display: inline-block;
+        width: 160px;
+        background-color: #f6f6f6;
+        &:hover{
+          background-color: #fff;
+          color: #898989;
+        }
+      }
+      span.active{
+        background-color: #fff;
+        color: #898989;
+      }
+    }
+    .bellDetail{
+      background-color: #fff;
+      padding:20px;
+      .detail-item{
+        display: none;
+        &.active{
+          display: block;
+        }
+        li{
+          height: 30px;
+          line-height: 30px;
+          position: relative;
+          padding-left: 12px;
+          a{
+            color: #585858;
+            &:before{
+              width: 4px;
+              height: 4px;
+              content: '';
+              position: absolute;
+              left: 0;
+              top:14px;
+              background: #b1b1b1;
+            }
+            &:hover{
+              text-decoration: underline;
+              color:#4ac227;
+              &:before{
+                background: #4ac227;
+              }
+            }
+          }
+        }
+      }
+      img{
+        display: block;
+      }
+    }
+  }
 }
 </style>

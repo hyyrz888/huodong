@@ -34,21 +34,6 @@
 
     <!--活动传播-->
     <HdcbTable/>
-    <!--账号设置-->
-
-    <!--品牌标识-->
-
-    <!--微信红包-->
-
-    <!--活动功能-->
-
-    <!--活动奖品-->
-
-    <!--核销奖品-->
-
-    <!--高级服务-->
-
-    <!--活动数据-->
 
   </div>
 </template>
@@ -310,7 +295,7 @@ th .small{
   display: block;
   margin-top: 20px;
 }
-.el-table th{
+#allService .el-table th{
   padding: 50px 0 !important;
 }
 .el-table thead.is-group th{

@@ -29,7 +29,6 @@ const routes = [
   },
   {
     path: '/main',
-    name: '/Main',
     component: Main,
     children: [
       {
@@ -41,10 +40,9 @@ const routes = [
   },
   {
     path: '/manage',
-    name: '/Manage',
     component: Manage,
     children: [
-      {path: '/manage', redirect: '/manage/index',},
+      {path: '/', redirect: '/manage/index',},
       {path: 'index', name: 'index', component: ManageIndex},
       {path: "cavindex", name: 'CavIndex', component: CavIndex},
       {path: 'playerRecord', name: 'playerRecord', component: PlayerRecord},

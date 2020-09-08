@@ -4,7 +4,7 @@
       <el-row class="tac">
         <el-col>
           <el-menu
-            default-active="/manage/index"
+            :default-active="currentPage"
             class="el-menu-vertical-demo"
             active-text-color="#4ac227"
             router
@@ -62,7 +62,15 @@
 
 <script>
 export default {
-  name: "ManageLeft"
+  name: "ManageLeft",
+  data(){
+    return {
+      currentPage:'/manage/index'
+    }
+  },
+  mounted() {
+    this.currentPage =  this.$route.path
+  }
 }
 </script>
 

@@ -24,7 +24,7 @@
     </el-row>
 
     <!--活动详情-->
-    <el-row :gutter="16">
+    <el-row :gutter="16" style="margin-bottom: 16px;">
       <el-col :span="8">
         <el-card class="box-card mdy-home-activity" :body-style="{ padding: '0px' }">
           <div slot="header" class="clearfix">
@@ -274,10 +274,6 @@ export default {
   width: 100%;
 }
 
-.mdy-home-activity {
-
-}
-
 .header-first-line span {
   font-size: 18px;
 }
@@ -352,16 +348,12 @@ export default {
   color: #fff
 }
 
-#hot-subject {
-  margin-top: 16px
-}
-
 #hot-subject span {
   font-size: 18px;
 }
 
 </style>
-<style>
+<style lang="less">
 #hot-subject .el-card__header {
   border-bottom: 0;
   padding-bottom: 0;
